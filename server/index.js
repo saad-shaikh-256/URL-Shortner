@@ -12,6 +12,9 @@ connectDB();
 app.use(cors());
 app.use(express.json({ extended: false }));
 
+app.use("/", require("./routes/redirect"));
+app.use("/api/url", require("./routes/url"));
+
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK", message: "SwiftLink API is running" });
 });
