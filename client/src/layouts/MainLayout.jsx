@@ -93,7 +93,7 @@ const MainLayout = ({ children }) => {
         </div>
         <div className="max-w-7xl mx-auto mt-20 pt-10 border-t border-neutral-100 flex justify-between items-center">
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
-            © 2026 SWIFTLINK STUDIOS
+            © 2026 MAKELINK STUDIOS
           </p>
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
             AUTOMATIC 90-DAY DELETION ACTIVE
