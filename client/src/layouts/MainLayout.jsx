@@ -7,50 +7,51 @@ const MainLayout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-black selection:text-white">
+    <div className="min-h-screen flex flex-col selection:bg-black selection:text-white overflow-x-hidden">
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full h-20 border-b-2 border-black px-6 md:px-12 flex items-center justify-between bg-white/90 backdrop-blur-md z-[100]">
-        <div className="flex items-center gap-12">
-          <button
-            onClick={scrollToTop}
-            className="hover:opacity-70 transition-opacity flex items-center"
-          >
-            <Logo
-              className="w-6 h-6"
-              textClassName="text-sm font-black tracking-tighter uppercase"
-            />
-          </button>
-          <div className="hidden lg:flex gap-8">
-            {["Features", "Process", "Pricing", "FAQ"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-[10px] font-black uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
-              >
-                {item}
-              </a>
-            ))}
+      <nav className="fixed top-0 w-full h-16 md:h-20 border-b-2 border-black bg-white/90 backdrop-blur-md z-[100]">
+        <div className="max-w-7xl mx-auto h-full px-4 md:px-12 flex items-center justify-between">
+          <div className="flex items-center gap-6 md:gap-12">
+            <button
+              onClick={scrollToTop}
+              className="hover:opacity-70 transition-opacity flex items-center"
+            >
+              <Logo
+                className="w-5 h-5 md:w-6 md:h-6"
+                textClassName="text-[10px] md:text-sm font-black tracking-tighter uppercase"
+              />
+            </button>
+            <div className="hidden lg:flex gap-8">
+              {["Features", "Process", "Pricing", "FAQ"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-[10px] font-black uppercase tracking-[0.2em] hover:opacity-50 transition-opacity"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-6">
-          <button className="hidden sm:block text-[10px] font-black uppercase tracking-[0.2em]">
-            Login
-          </button>
-          <button
-            onClick={scrollToTop}
-            className="bg-black text-white px-6 py-2.5 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-neutral-800 transition-colors"
-          >
-            Get Started
-          </button>
+          <div className="flex items-center gap-3 md:gap-6">
+            <button className="hidden sm:block text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">
+              Login
+            </button>
+            <button
+              onClick={scrollToTop}
+              className="bg-black text-white px-4 md:px-6 py-2 md:py-2.5 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] hover:bg-neutral-800 transition-colors"
+            >
+              Get Started
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* PAGE CONTENT */}
       <main className="flex-grow">{children}</main>
 
-      {/* FOOTER */}
-      <footer className="py-24 border-t-2 border-black px-12 bg-white">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+      {/* FOOTER WITH LEGAL DISCLAIMER */}
+      <footer className="py-16 md:py-24 border-t-2 border-black bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="max-w-xs">
             <button
               onClick={scrollToTop}
@@ -66,37 +67,49 @@ const MainLayout = ({ children }) => {
               engineering and brutalist design.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-20">
-            <div className="flex flex-col gap-4">
-              <span className="text-[10px] font-black uppercase tracking-widest text-black">
+          <div className="grid grid-cols-2 gap-10 md:gap-20 w-full md:w-auto">
+            <div className="flex flex-col gap-3 md:gap-4">
+              <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-black">
                 Legal
               </span>
-              <span className="text-xs font-medium text-neutral-400 hover:text-black cursor-pointer">
-                Privacy Policy
+              <span className="text-[11px] md:text-xs font-medium text-neutral-400">
+                Privacy
               </span>
-              <span className="text-xs font-medium text-neutral-400 hover:text-black cursor-pointer">
-                Terms of Service
+              <span className="text-[11px] md:text-xs font-medium text-neutral-400">
+                Terms
               </span>
             </div>
-            <div className="flex flex-col gap-4">
-              <span className="text-[10px] font-black uppercase tracking-widest text-black">
+            <div className="flex flex-col gap-3 md:gap-4">
+              <span className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-black">
                 Connect
               </span>
-              <span className="text-xs font-medium text-neutral-400 hover:text-black cursor-pointer">
-                Twitter / X
+              <span className="text-[11px] md:text-xs font-medium text-neutral-400">
+                Twitter
               </span>
-              <span className="text-xs font-medium text-neutral-400 hover:text-black cursor-pointer">
-                GitHub Repository
+              <span className="text-[11px] md:text-xs font-medium text-neutral-400">
+                GitHub
               </span>
             </div>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-20 pt-10 border-t border-neutral-100 flex justify-between items-center">
-          <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
+
+        {/* LEGAL LIMITATION OF LIABILITY */}
+        <div className="max-w-7xl mx-auto px-4 md:px-12 mt-12">
+          <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-neutral-400 leading-relaxed border-l-2 border-black pl-4">
+            NOTICE: The creator of this platform is not responsible for the
+            content, safety, or legality of any destination URLs generated by
+            users. This is a neutral redirection tool provided "as-is" for
+            educational purposes. Users are solely responsible for the links
+            they create and share.
+          </p>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 md:px-12 mt-10 pt-8 border-t border-neutral-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
             © 2026 MAKELINK STUDIOS
           </p>
-          <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
-            AUTOMATIC 90-DAY DELETION ACTIVE
+          <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.4em] text-neutral-300">
+            EST. IN THE NORTH
           </p>
         </div>
       </footer>

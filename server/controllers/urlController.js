@@ -1,12 +1,30 @@
 const Url = require("../models/Url");
 const crypto = require("crypto");
 
+const isSafeUrl = (url) => {
+  const forbiddenProtocols = ["javascript:", "data:", "vbscript:", "file:"];
+  const lowerUrl = url.toLowerCase().trim();
+
+  if (forbiddenProtocols.some((proto) => lowerUrl.startsWith(proto)))
+    return false;
+
+  const xssPattern = /<script|%3Cscript|javascript:|alert\(|onerror=/i;
+  if (xssPattern.test(lowerUrl)) return false;
+
+  return true;
+};
+
 exports.shortenUrl = async (req, res) => {
   try {
     let { longUrl, customCode } = req.body;
     const baseUrl = process.env.BASE_URL;
 
     console.log("Request received for URL:", longUrl);
+    if (!isSafeUrl(longUrl)) {
+      return res.status(400).json({
+        message: "Security Alert: This URL contains a forbidden pattern.",
+      });
+    }
 
     if (!longUrl) return res.status(400).json({ message: "URL is required" });
 

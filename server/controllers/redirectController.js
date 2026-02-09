@@ -8,7 +8,7 @@ exports.redirect = async (req, res) => {
       url.clicks++;
       await url.save();
 
-      return res.redirect(url.longUrl);
+      return res.status(302).redirect(url.longUrl);
     } else {
       return res.status(404).json("No url found");
     }
