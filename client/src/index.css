@@ -1,41 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: var(--color-indigo-50);
-  --color-primary-100: var(--color-indigo-100);
-  --color-primary-200: var(--color-indigo-200);
-  --color-primary-300: var(--color-indigo-300);
-  --color-primary-400: var(--color-indigo-400);
-  --color-primary-500: var(--color-indigo-500);
-  --color-primary-600: var(--color-indigo-600);
-  --color-primary-700: var(--color-indigo-700);
-  --color-primary-800: var(--color-indigo-800);
-  --color-primary-900: var(--color-indigo-900);
-  --color-primary-950: var(--color-indigo-950);
-
-  --color-error: var(--color-red-600);
-  --color-success: var(--color-emerald-600);
+  --color-primary: #000000;
+  --color-border: #000000;
+  --color-muted: #737373;
 }
 
-/* Base Styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  background-color: var(--color-neutral-50);
-  color: var(--color-neutral-900);
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  scroll-behavior: smooth;
 }
 
+/* Prevent mobile horizontal overflow */
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
 
-#root {
-  width: 100%;
-  min-height: 100vh;
+/* Fluid Brutalist UI */
+.input-brutalist {
+  @apply w-full px-4 md:px-6 py-4 md:py-5 bg-white border-2 border-black rounded-none
+         focus:outline-none focus:ring-4 focus:ring-neutral-100 transition-all
+         placeholder:text-neutral-300 font-bold text-base md:text-lg;
+}
+
+.btn-brutalist {
+  @apply px-6 md:px-10 py-4 md:py-5 bg-black text-white font-black uppercase tracking-widest
+         rounded-none hover:bg-neutral-800 active:translate-y-1 transition-all
+         disabled:bg-neutral-300 flex items-center justify-center gap-3 text-sm md:text-base;
+}
+
+.section-padding {
+  @apply py-16 md:py-32 px-4 md:px-12;
+}
+.max-width {
+  @apply max-w-7xl mx-auto;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
   display: flex;
-  flex-direction: column;
+  width: max-content;
+  animation: marquee 45s linear infinite;
 }

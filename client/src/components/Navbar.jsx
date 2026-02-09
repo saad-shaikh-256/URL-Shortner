@@ -1,32 +1,42 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Logo from "./Logo";
 
 const Navbar = () => {
   return (
-    <nav className="border-b border-neutral-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <Logo className="w-9 h-9 text-primary-600" />
-          <div className="hidden md:flex space-x-8">
+    <motion.nav
+      initial={{ y: -10, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
+    >
+      <div className="glass-panel rounded-2xl px-6 h-14 flex items-center justify-between border border-neutral-200/50">
+        <Logo
+          className="w-6 h-6 text-primary-600"
+          textClassName="text-sm font-bold tracking-tight"
+        />
+
+        <div className="hidden md:flex items-center gap-6">
+          {["Features", "Analytics", "Enterprise"].map((item) => (
             <a
-              href="#"
-              className="text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors"
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-[12px] font-semibold text-neutral-500 hover:text-neutral-900 transition-colors"
             >
-              How it works
+              {item}
             </a>
-            <a
-              href="#"
-              className="text-sm font-medium text-neutral-600 hover:text-primary-600 transition-colors"
-            >
-              Analytics
-            </a>
-          </div>
-          <button className="bg-primary-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all shadow-sm shadow-primary-200">
+          ))}
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button className="text-[12px] font-bold text-neutral-600 px-3 hover:text-neutral-900">
+            Login
+          </button>
+          <button className="bg-neutral-900 text-white px-4 py-1.5 rounded-full text-[12px] font-bold hover:bg-neutral-800 transition-all active:scale-95">
             Get Started
           </button>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

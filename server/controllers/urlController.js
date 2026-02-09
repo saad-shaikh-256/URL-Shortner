@@ -1,57 +1,40 @@
-const { nanoid } = require("nanoid");
-const validUrl = require("valid-url");
 const Url = require("../models/Url");
+const crypto = require("crypto");
 
 exports.shortenUrl = async (req, res) => {
-  let { longUrl, customCode } = req.body;
-  const baseUrl = process.env.BASE_URL;
-
-  if (!longUrl.startsWith("http://") && !longUrl.startsWith("https://")) {
-    longUrl = `https://${longUrl}`;
-  }
-
-  if (!validUrl.isUri(baseUrl)) {
-    return res.status(401).json({ message: "Invalid base server URL" });
-  }
-
-  if (!validUrl.isUri(longUrl)) {
-    return res
-      .status(401)
-      .json({ message: "Invalid long URL. Please include a valid domain." });
-  }
-
   try {
+    let { longUrl, customCode } = req.body;
+    const baseUrl = process.env.BASE_URL;
+
+    console.log("Request received for URL:", longUrl);
+
+    if (!longUrl) return res.status(400).json({ message: "URL is required" });
+
+    if (!longUrl.startsWith("http")) {
+      longUrl = `https://${longUrl}`;
+    }
+
     let urlCode;
     if (customCode && customCode.trim() !== "") {
-      urlCode = customCode.trim().replace(/[^a-zA-Z0-9-_]/g, "");
-
+      urlCode = customCode
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9-_]/g, "");
       const existingCustom = await Url.findOne({ urlCode });
-      if (existingCustom) {
-        return res
-          .status(400)
-          .json({ message: "Custom alias already taken. Try another one." });
-      }
+      if (existingCustom)
+        return res.status(400).json({ message: "Alias taken" });
     } else {
-      urlCode = nanoid(8);
+      urlCode = crypto.randomBytes(3).toString("hex");
     }
 
-    if (!customCode) {
-      let url = await Url.findOne({ longUrl });
-      if (url) return res.json(url);
-    }
+    const shortUrl = `${baseUrl}/${urlCode}`;
+    const newUrl = new Url({ longUrl, shortUrl, urlCode, date: new Date() });
 
-    const shortUrl = baseUrl + "/" + urlCode;
-    const url = new Url({
-      longUrl,
-      shortUrl,
-      urlCode,
-      date: new Date(),
-    });
-
-    await url.save();
-    res.json(url);
+    await newUrl.save();
+    console.log("URL Saved Successfully:", urlCode);
+    return res.status(201).json(newUrl);
   } catch (err) {
-    console.error("Shorten Error:", err);
-    res.status(500).json({ message: "Server error" });
+    console.error("SERVER ERROR:", err);
+    return res.status(500).json({ message: err.message });
   }
 };
