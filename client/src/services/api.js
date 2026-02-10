@@ -13,3 +13,12 @@ export const shortenUrl = async (longUrl, customCode) => {
     throw error.response?.data?.message || "Connection Error";
   }
 };
+
+export const pingServer = async () => {
+  try {
+    const response = await API.get("/ping");
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};

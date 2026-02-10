@@ -17,6 +17,9 @@ const limiter = rateLimit({
 });
 
 app.use("/api/", limiter);
+app.get("/api/ping", (req, res) => {
+  res.status(200).json({ status: "ready", message: "Server is awake" });
+});
 
 connectDB();
 
