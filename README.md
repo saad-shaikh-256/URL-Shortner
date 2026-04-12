@@ -14,8 +14,7 @@
 ## 🎨 Figma UI Inspiration
 
 - **[Figma Design File](https://www.figma.com/community/file/1371040846150181225/makelink-brutalist-ui-kit-design-system-url-shortner)**
-  <br>_(Status: Under Development)_
-
+  
 ---
 
 ## ✨ Features
